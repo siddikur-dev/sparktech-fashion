@@ -1,0 +1,132 @@
+<div class="custom-hero-banner page-width">
+  <div class="hero-wrapper">
+    <div class="hero-text-side">
+      <h1 class="hero-main-title">
+        <span class="highlight-white">LET’S</span> <br>
+        EXPLORE <br>
+        <span class="highlight-yellow">UNIQUE</span> <br>
+        CLOTHES.
+      </h1>
+      <p class="hero-description">Live for Influential and Innovative fashion!</p>
+      <a href="{{ section.settings.btn_url }}" class="hero-shop-btn">Shop Now</a>
+    </div>
+
+    <div class="hero-image-side">
+      {% if section.settings.image != blank %}
+        <img src="{{ section.settings.image | image_url: width: 1000 }}" alt="Banner Image" class="main-model-img">
+      {% else %}
+        {% comment %} Placeholder image if no image selected {% endcomment %}
+        <img
+          src="https://cdn.shopify.com/s/files/1/0793/3820/9526/files/banner-girl.png"
+          alt="Fashion"
+          class="main-model-img"
+        >
+      {% endif %}
+
+      <span class="decor-star star-tl">★</span>
+      <span class="decor-star star-tr">★</span>
+      <span class="decor-star star-br">★</span>
+      <span class="decor-star star-bl">★</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .custom-hero-banner {
+    padding: 30px 0;
+  }
+  .hero-wrapper {
+    background-color: #F4F6F5; /* ডিজাইনের মতো অফ-হোয়াইট ব্যাকগ্রাউন্ড */
+    border-radius: 60px; /* রাউন্ডেড কর্নার */
+    display: flex;
+    align-items: center;
+    padding: 40px 80px;
+    margin:30px;
+    position: relative;
+    overflow: hidden;
+    min-height: 550px;
+  }
+
+  /* টাইটেল স্টাইল */
+  .hero-text-side { flex: 1; z-index: 5; }
+  .hero-main-title {
+    font-size: 75px;
+    font-weight: 900;
+    line-height: 1.1;
+    color: #000;
+    margin: 0 0 20px 0;
+  }
+
+  /* হাইলাইট এফেক্ট */
+  .highlight-white {
+    background: #FFFFFF;
+    padding: 0 10px;
+    display: inline-block;
+  }
+  .highlight-yellow {
+    background: #EBD96B;
+    padding: 0 15px;
+    display: inline-block;
+    transform: rotate(-2deg); /* ডিজাইনের মতো সামান্য বাঁকানো */
+  }
+
+  .hero-description {
+    font-size: 20px;
+    color: #000;
+    margin-bottom: 30px;
+  }
+  .hero-shop-btn {
+    background: #000;
+    color: #fff;
+    padding: 15px 40px;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 10px;
+    display: inline-block;
+  }
+
+  /* ইমেজ এবং স্টার সেটিংস */
+  .hero-image-side {
+    flex: 1.2;
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .main-model-img {
+    max-width: 100%;
+    height: auto;
+    z-index: 2;
+  }
+  .decor-star {
+    position: absolute;
+    color: #E0E0E0;
+    font-size: 30px;
+  }
+  .star-tl { top: 10%; left: 10%; }
+  .star-tr { top: 15%; right: 5%; }
+  .star-br { bottom: 15%; right: 10%; }
+  .star-bl { bottom: 10%; left: 20%; }
+
+  /* মোবাইল ভিউ */
+  @media screen and (max-width: 990px) {
+    .hero-wrapper {
+      flex-direction: column;
+      padding: 40px 20px;
+      text-align: center;
+      border-radius: 30px;
+    }
+    .hero-main-title { font-size: 45px; }
+    .hero-image-side { margin-top: 30px; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Hero Banner Custom",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Banner Image" },
+    { "type": "url", "id": "btn_url", "label": "Button Link" }
+  ],
+  "presets": [{ "name": "Hero Banner Custom" }]
+}
+{% endschema %}

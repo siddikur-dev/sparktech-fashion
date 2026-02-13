@@ -1,0 +1,98 @@
+<div class="brand-marquee" id="BrandMarquee-{{ section.id }}">
+  <div class="marquee-wrapper">
+    {% for block in section.blocks %}
+      <div class="brand-item">
+        {% if block.settings.brand_logo != blank %}
+          {{ block.settings.brand_logo | image_url: width: 200 | image_tag: alt: block.settings.brand_logo.alt, class: 'brand-logo' }}
+        {% else %}
+          {{ 'logo' | placeholder_svg_tag: 'brand-logo' }}
+        {% endif %}
+      </div>
+    {% endfor %}
+    {% comment %} Repeat blocks for infinite scroll effect {% endcomment %}
+    {% for block in section.blocks %}
+      <div class="brand-item">
+        {% if block.settings.brand_logo != blank %}
+          {{ block.settings.brand_logo | image_url: width: 200 | image_tag: alt: block.settings.brand_logo.alt, class: 'brand-logo' }}
+        {% else %}
+          {{ 'logo' | placeholder_svg_tag: 'brand-logo' }}
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<style>
+  #BrandMarquee-{{ section.id }} {
+    background-color: #EBD96B; /* Figma Brand Yellow */
+    padding: 30px 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+  }
+
+  .marquee-wrapper {
+    display: flex;
+    animation: marquee 20s linear infinite;
+    gap: 80px; /* Space between logos */
+    padding-left: 40px;
+  }
+
+  .brand-item {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .brand-logo {
+    height: 40px; /* Logo size as per design */
+    width: auto;
+    /* Removed grayscale filter to keep original colors */
+    filter: none !important; 
+    opacity: 1;
+  }
+
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* Responsive adjustment for mobile */
+  @media screen and (max-width: 749px) {
+    .marquee-wrapper { gap: 40px; }
+    .brand-logo { height: 28px; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Brand Marquee",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Brand Logo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "brand_logo",
+          "label": "Brand Logo"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Brand Marquee",
+      "blocks": [
+        { "type": "logo" },
+        { "type": "logo" },
+        { "type": "logo" },
+        { "type": "logo" },
+        { "type": "logo" },
+        { "type": "logo" }
+      ]
+    }
+  ]
+}
+{% endschema %}

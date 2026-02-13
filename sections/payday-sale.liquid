@@ -1,0 +1,148 @@
+<div class="payday-sale-container" id="PaydaySale-{{ section.id }}">
+  <div class="payday-wrapper">
+    <div class="payday-image-side">
+      {% if section.settings.image != blank %}
+        {{ section.settings.image | image_url: width: 1000 | image_tag: class: 'main-sale-img' }}
+      {% else %}
+        {{ 'image' | placeholder_svg_tag: 'main-sale-img placeholder' }}
+      {% endif %}
+      
+      {% comment %} Decorative stars as per design {% endcomment %}
+      <span class="star star-1">★</span>
+      <span class="star star-2">★</span>
+      <span class="star star-3">★</span>
+    </div>
+
+    <div class="payday-content-side">
+      <div class="content-box">
+        <h2 class="sale-title">
+          <span class="bg-white">PAYDAY</span><br>
+          SALE NOW
+        </h2>
+        <div class="sale-description">
+          <p>{{ section.settings.description }}</p>
+          <p class="sale-date"><strong>{{ section.settings.date_range }}</strong></p>
+          <p class="terms">*{{ section.settings.terms }}</p>
+        </div>
+        <a href="{{ section.settings.btn_link }}" class="sale-shop-btn">SHOP NOW</a>
+      </div>
+      <span class="star star-4">★</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  #PaydaySale-{{ section.id }} {
+    background-color: #F7E04C; /* Design yellow background */
+    margin: 40px 0;
+    overflow: hidden;
+  }
+
+  .payday-wrapper {
+    display: flex;
+    align-items: stretch;
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .payday-image-side {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .main-sale-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+  }
+
+  .payday-content-side {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px;
+    position: relative;
+  }
+
+  .sale-title {
+    font-size: 80px;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 30px;
+    color: #000;
+  }
+
+  .sale-title .bg-white {
+    background: #fff;
+    padding: 0 15px;
+    display: inline-block;
+  }
+
+  .sale-description {
+    font-size: 22px;
+    color: #000;
+    line-height: 1.4;
+    max-width: 450px;
+  }
+
+  .sale-date {
+    margin-top: 20px;
+    font-size: 24px;
+  }
+
+  .terms {
+    font-size: 16px;
+    margin-top: 10px;
+  }
+
+  .sale-shop-btn {
+    display: inline-block;
+    background: #000;
+    color: #fff;
+    padding: 18px 50px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 10px;
+    margin-top: 30px;
+    font-size: 18px;
+  }
+
+  /* Decorative Stars */
+  .star {
+    position: absolute;
+    color: #FFF;
+    font-size: 30px;
+    opacity: 0.7;
+  }
+  .star-1 { top: 15%; left: 10%; font-size: 40px; }
+  .star-2 { top: 10%; right: 20%; }
+  .star-3 { bottom: 20%; left: 15%; }
+  .star-4 { bottom: 10%; right: 10%; font-size: 45px; }
+
+  @media screen and (max-width: 990px) {
+    .payday-wrapper { flex-direction: column; }
+    .sale-title { font-size: 50px; }
+    .payday-content-side { padding: 40px 20px; text-align: center; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Payday Sale Banner",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Main Image" },
+    { "type": "textarea", "id": "description", "label": "Description", "default": "Spend minimal $100 get 30% off voucher code for your next purchase" },
+    { "type": "text", "id": "date_range", "label": "Sale Date", "default": "1 June - 10 June 2021" },
+    { "type": "text", "id": "terms", "label": "Terms", "default": "Terms & Conditions apply" },
+    { "type": "url", "id": "btn_link", "label": "Button Link" }
+  ],
+  "presets": [
+    { "name": "Payday Sale Banner" }
+  ]
+}
+{% endschema %}

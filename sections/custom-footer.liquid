@@ -1,0 +1,124 @@
+<footer class="footer-section" id="Footer-{{ section.id }}">
+  <div class="page-width footer-container">
+    <div class="footer-block brand-info">
+      <h2 class="footer-logo">FASHION</h2>
+      <p class="footer-text">Complete your style with awesome clothes from us.</p>
+      
+      <div class="social-icons">
+        <a href="{{ section.settings.fb_link | default: '#' }}" class="social-link">
+          <img src="https://cdn.shopify.com/s/files/1/0793/3820/9526/files/Rectangle_66.png?v=1770785129" alt="FB" class="footer-social-img" width="32" height="32" loading="lazy">
+        </a>
+
+        <a href="{{ section.settings.ig_link | default: '#' }}" class="social-link">
+          <img src="https://cdn.shopify.com/s/files/1/0793/3820/9526/files/Group_11.png?v=1770785054" alt="IG" class="footer-social-img" width="32" height="32" loading="lazy">
+        </a>
+
+        <a href="{{ section.settings.tw_link | default: '#' }}" class="social-link">
+          <img src="https://cdn.shopify.com/s/files/1/0793/3820/9526/files/Group_13.png?v=1770785054" alt="TW" class="footer-social-img" width="32" height="32" loading="lazy">
+        </a>
+
+        <a href="{{ section.settings.li_link | default: '#' }}" class="social-link">
+          <img src="https://cdn.shopify.com/s/files/1/0793/3820/9526/files/Group_12.png?v=1770785054" alt="LI" class="footer-social-img" width="32" height="32" loading="lazy">
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-links-wrapper">
+      <div class="footer-block">
+        <h3 class="footer-heading">Company</h3>
+        <ul class="footer-list">
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact us</a></li>
+          <li><a href="#">Support</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+      <div class="footer-block">
+        <h3 class="footer-heading">Quick Link</h3>
+        <ul class="footer-list">
+          <li><a href="#">Share Location</a></li>
+          <li><a href="#">Orders Tracking</a></li>
+          <li><a href="#">Size Guide</a></li>
+          <li><a href="#">FAQs</a></li>
+        </ul>
+      </div>
+      <div class="footer-block">
+        <h3 class="footer-heading">Legal</h3>
+        <ul class="footer-list">
+          <li><a href="#">Terms & conditions</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer-section { 
+    background: #000; 
+    padding: 80px 30px; 
+    color: #fff; 
+  }
+
+  .footer-container { 
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex; 
+    justify-content: space-between; 
+    align-items: flex-start;
+    flex-wrap: wrap; 
+  }
+
+  .footer-logo { font-size: 40px; font-weight: 900; margin-bottom: 25px; letter-spacing: 2px; }
+  .footer-text { color: #8E8E8E; margin-bottom: 30px; max-width: 350px; font-size: 18px; line-height: 1.4; }
+  
+  /* Social Icons Styling - প্যাডিং এবং সাইজ ফিক্সড */
+  .social-icons { display: flex; gap: 15px; padding-top: 10px; }
+  
+  .social-link { 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    width: 52px; 
+    height: 52px; 
+    background: #EBD96B; 
+    border-radius: 12px; 
+    padding: 12px; /* প্যাডিং বাড়ানো হয়েছে */
+    transition: 0.3s ease;
+    text-decoration: none;
+  }
+  
+  .social-link:hover { transform: translateY(-5px); background: #f5e482; }
+  
+  .footer-social-img { 
+    width: 26px; /* আইকনটি আগের চেয়ে একটু বড় */
+    height: 26px; 
+    object-fit: contain; 
+  }
+
+  .footer-links-wrapper { display: flex; gap: 80px; flex-wrap: wrap; }
+  .footer-heading { font-size: 22px; font-weight: 700; margin-bottom: 25px; color: #fff; }
+  .footer-list { list-style: none; padding: 0; margin: 0; }
+  .footer-list li { margin-bottom: 15px; }
+  .footer-list a { color: #8E8E8E; text-decoration: none; font-size: 16px; transition: 0.2s; }
+  .footer-list a:hover { color: #EBD96B; }
+
+  @media screen and (max-width: 990px) {
+    .footer-section { padding: 50px 20px; }
+    .footer-container { flex-direction: column; gap: 40px; }
+    .footer-links-wrapper { gap: 30px; justify-content: space-between; width: 100%; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Custom Footer",
+  "settings": [
+    { "type": "url", "id": "fb_link", "label": "Facebook Link" },
+    { "type": "url", "id": "ig_link", "label": "Instagram Link" },
+    { "type": "url", "id": "tw_link", "label": "Twitter Link" },
+    { "type": "url", "id": "li_link", "label": "LinkedIn Link" }
+  ],
+  "presets": [{ "name": "Custom Footer" }]
+}
+{% endschema %}

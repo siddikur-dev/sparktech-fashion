@@ -1,0 +1,126 @@
+<div class="newsletter-section" id="Newsletter-{{ section.id }}">
+  <div class="newsletter-container page-width">
+    <h2 class="newsletter-title">{{ section.settings.heading | upcase }}</h2>
+    <p class="newsletter-desc">{{ section.settings.subheading }}</p>
+
+    {% form 'customer', class: 'newsletter-form' %}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      <div class="input-wrapper">
+        <input
+          type="email"
+          name="contact[email]"
+          id="NewsletterEmail"
+          class="newsletter-input"
+          value="{{ form.email }}"
+          placeholder="Add your email here"
+          required
+        >
+        <button type="submit" class="newsletter-submit-btn" name="commit">
+          SEND
+        </button>
+      </div>
+      
+      {%- if form.posted_successfully? -%}
+        <p class="newsletter-success">Thanks for joining!</p>
+      {%- endif -%}
+    {% endform %}
+  </div>
+</div>
+
+<style>
+  .newsletter-section {
+    background-color: #EBD96B; /* হুবহু ডিজাইনের হলুদ রঙ */
+    padding: 100px 20px;
+    text-align: center;
+  }
+  .newsletter-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .newsletter-title {
+    font-size: 48px;
+    font-weight: 900;
+    color: #fff;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+    line-height: 1.2;
+  }
+  .newsletter-desc {
+    font-size: 20px;
+    color: #fff;
+    margin-bottom: 40px;
+  }
+  .newsletter-form {
+    display: flex;
+    justify-content: center;
+  }
+  .input-wrapper {
+    background: #fff;
+    padding: 8px;
+    border-radius: 12px;
+    display: flex;
+    width: 100%;
+    max-width: 550px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  }
+  .newsletter-input {
+    flex: 1;
+    border: none;
+    padding: 15px 20px;
+    font-size: 16px;
+    outline: none;
+    border-radius: 10px;
+  }
+  .newsletter-submit-btn {
+    background: #000;
+    color: #fff;
+    border: none;
+    padding: 0 40px;
+    font-weight: bold;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: opacity 0.3s;
+  }
+  .newsletter-submit-btn:hover {
+    opacity: 0.8;
+  }
+  .newsletter-success {
+    color: #000;
+    margin-top: 20px;
+    font-weight: bold;
+  }
+
+  @media screen and (max-width: 749px) {
+    .newsletter-title { font-size: 32px; }
+    .newsletter-desc { font-size: 16px; }
+    .input-wrapper { flex-direction: column; background: transparent; gap: 10px; box-shadow: none; padding: 0; }
+    .newsletter-input { border-radius: 8px; }
+    .newsletter-submit-btn { padding: 15px; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Shopping Community",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "JOIN SHOPPING COMMUNITY TO GET MONTHLY PROMO"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Type your email down below and be young wild generation"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shopping Community"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,144 @@
+<div class="download-app-section" id="DownloadApp-{{ section.id }}">
+  <div class="page-width download-wrapper">
+    <div class="download-text-side">
+      <h2 class="download-title">
+        DOWNLOAD APP & <br>
+        GET THE VOUCHER!
+      </h2>
+      <p class="download-desc">
+        Get 30% off for first transaction using Rondovision mobile app for now.
+      </p>
+      
+      <div class="store-btns">
+        <a href="#" class="store-btn">
+          <img src="https://cdn.shopify.com/s/files/1/0793/3820/9526/files/Rectangle_18.png?v=1770727272" alt="App Store" width="160">
+        </a>
+        <a href="#" class="store-btn">
+          <img src="https://cdn.shopify.com/s/files/1/0793/3820/9526/files/Rectangle_55.png?v=1770727273" alt="Google Play" width="160">
+        </a>
+      </div>
+    </div>
+
+    <div class="download-image-side">
+      <div class="visual-container">
+        <div class="circle circle-large"></div>
+        <div class="circle circle-medium"></div>
+        
+        <div class="phone-mockup">
+          {% if section.settings.mobile_img != blank %}
+            {{ section.settings.mobile_img | image_url: width: 1000 | image_tag: class: 'mockup-img' }}
+          {% else %}
+            <img src="https://cdn.shopify.com/s/files/1/0793/3820/9526/files/mobile-mockup.png" alt="Mobile App" class="mockup-img">
+          {% endif %}
+        </div>
+
+        <div class="floating-dot dot-yellow-top"></div>
+        <div class="floating-dot dot-yellow-bottom"></div>
+        <div class="floating-dot dot-grey-top"></div>
+        <div class="floating-dot dot-grey-bottom"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Section Layout with Requested Margins */
+  .download-app-section { 
+    padding: 100px 0; 
+    background: #fff; 
+    overflow: hidden; 
+    position: relative;
+    margin-right: 30px; /* Added 30px margin on the right */
+    margin-left: 30px;  /* Added 30px margin on the left for balance */
+  }
+  
+  .download-wrapper { 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+  }
+  
+  /* Text Side Typography */
+  .download-text-side { flex: 1; z-index: 2; }
+  .download-title { 
+    font-size: 56px; 
+    font-weight: 900; 
+    line-height: 1.1; 
+    margin-bottom: 25px; 
+    color: #000; 
+    text-transform: uppercase; 
+  }
+  .download-desc { 
+    font-size: 20px; 
+    color: #666; 
+    margin-bottom: 40px; 
+    max-width: 450px; 
+    line-height: 1.5;
+  }
+  
+  /* Store Buttons Styling */
+  .store-btns { display: flex; gap: 15px; }
+  .store-btn img { height: 55px; width: auto; transition: transform 0.3s ease; }
+  .store-btn:hover img { transform: translateY(-5px); }
+
+  /* Image Side Visuals */
+  .download-image-side { flex: 1.2; position: relative; display: flex; justify-content: flex-end; }
+  .visual-container { 
+    position: relative; 
+    width: 600px; 
+    height: 600px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+  }
+  
+  /* Decorative Background Circles */
+  .circle { 
+    position: absolute; 
+    border: 1px solid #F0F0F0; 
+    border-radius: 50%; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    z-index: 1; 
+  }
+  .circle-large { width: 580px; height: 580px; }
+  .circle-medium { width: 420px; height: 420px; }
+
+  /* Phone Mockup Styling */
+  .phone-mockup { width: 340px; position: relative; z-index: 3; }
+  .mockup-img { 
+    width: 100%; 
+    height: auto; 
+    filter: drop-shadow(0 30px 60px rgba(0,0,0,0.12)); 
+  }
+
+  /* Floating Ornaments (Yellow & Grey Dots) */
+  .floating-dot { position: absolute; border-radius: 50%; z-index: 4; }
+  .dot-yellow-top { width: 35px; height: 35px; background: #EBD96B; top: 15%; right: 5%; }
+  .dot-yellow-bottom { width: 25px; height: 25px; background: #EBD96B; bottom: 15%; left: 10%; }
+  .dot-grey-top { width: 20px; height: 20px; background: #999; top: 22%; left: 15%; opacity: 0.6; }
+  .dot-grey-bottom { width: 15px; height: 15px; background: #999; bottom: 30%; right: 0%; opacity: 0.4; }
+
+  /* Mobile Responsiveness */
+  @media screen and (max-width: 990px) {
+    .download-app-section { margin: 30px 15px; padding: 60px 0; }
+    .download-wrapper { flex-direction: column; text-align: center; }
+    .download-title { font-size: 36px; }
+    .download-desc { margin: 0 auto 30px; font-size: 18px; }
+    .store-btns { justify-content: center; margin-bottom: 50px; }
+    .visual-container { width: 100%; height: auto; }
+    .circle { display: none; }
+    .phone-mockup { width: 280px; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Download App Custom",
+  "settings": [
+    { "type": "image_picker", "id": "mobile_img", "label": "Mobile Mockup Image" }
+  ],
+  "presets": [{ "name": "Download App Custom" }]
+}
+{% endschema %}

@@ -1,0 +1,166 @@
+<div class="youngs-favourite-section page-width" id="YoungsFavourite-{{ section.id }}">
+  <div class="section-header">
+    <h2 class="title">{{ section.settings.heading | default: 'Young\`s Favourite' }}</h2>
+    <div class="title-underline"></div>
+  </div>
+
+  <div class="favourite-grid">
+    {% for block in section.blocks %}
+      <div class="favourite-card">
+        <div class="image-wrapper">
+          {% if block.settings.image != blank %}
+            {{ block.settings.image | image_url: width: 800 | image_tag: class: 'favourite-img' }}
+          {% else %}
+            {{ 'image' | placeholder_svg_tag: 'favourite-img placeholder' }}
+          {% endif %}
+        </div>
+        <div class="card-info">
+          <div class="text-content">
+            <h3>{{ block.settings.title }}</h3>
+            <p>{{ block.settings.subtitle }}</p>
+          </div>
+          <a href="{{ block.settings.link }}" class="arrow-btn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<style>
+  #YoungsFavourite-{{ section.id }} {
+    padding: 60px 20px;
+    background: #fff;
+  }
+
+  /* Section Title with Yellow Highlight */
+  .section-header {
+    position: relative;
+    margin-bottom: 50px;
+    display: inline-block;
+  }
+  .section-header .title {
+    font-size: 40px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    position: relative;
+    z-index: 2;
+    margin: 0;
+    color: #000;
+  }
+  .title-underline {
+    position: absolute;
+    bottom: 5px;
+    right: -10px;
+    width: 80px;
+    height: 15px;
+    background-color: #EBD96B; /* Figma Yellow */
+    border-radius: 20px;
+    z-index: 1;
+    transform: rotate(-2deg);
+  }
+
+  /* Grid Layout */
+  .favourite-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns as per screenshot */
+    gap: 30px;
+  }
+
+  /* Card and Image Styling */
+  .favourite-card {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border-radius: 20px; /* Rounded corners for the entire card */
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05); /* Soft shadow */
+    transition: transform 0.3s ease;
+  }
+  .favourite-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .image-wrapper {
+    aspect-ratio: 16/9; /* Aspect ratio for images */
+    overflow: hidden;
+    margin-bottom: 15px;
+  }
+  .favourite-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+  .favourite-card:hover .favourite-img {
+    transform: scale(1.05);
+  }
+
+  /* Info Section */
+  .card-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 25px 25px; /* Padding for text and button */
+  }
+  .text-content h3 {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0;
+    color: #000;
+  }
+  .text-content p {
+    font-size: 14px;
+    color: #666;
+    margin: 5px 0 0;
+  }
+  .arrow-btn {
+    color: #999;
+    transition: color 0.3s;
+    flex-shrink: 0; /* Prevent arrow from shrinking */
+  }
+  .arrow-btn:hover { color: #000; }
+
+  /* Mobile Responsive */
+  @media screen and (max-width: 749px) {
+    .favourite-grid { grid-template-columns: 1fr; } /* Single column on mobile */
+    .section-header .title { font-size: 30px; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Young's Favourite",
+  "max_blocks": 2,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "Young's Favourite"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Favourite Card",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Card Image" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Trending on Instagram" },
+        { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Explore Now!" },
+        { "type": "url", "id": "link", "label": "Card Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Young's Favourite",
+      "blocks": [
+        { "type": "card" },
+        { "type": "card" }
+      ]
+    }
+  ]
+}
+{% endschema %}
